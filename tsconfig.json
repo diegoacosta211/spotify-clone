@@ -29,7 +29,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "icons/index.js", "menus/index.js"  ],
+, "icons/Index.js"  ],
   "exclude": [
     "node_modules"
   ]

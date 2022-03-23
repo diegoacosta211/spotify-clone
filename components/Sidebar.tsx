@@ -1,6 +1,5 @@
 import {
   Link,
-  Stack,
   VStack,
   List,
   ListItem,
@@ -11,8 +10,8 @@ import {
 } from "@chakra-ui/layout";
 import NextLink from "next/link";
 import { NextComponentType } from "next";
-import { mainMenu, musicMenu } from "menus/index.js";
-import { Logo } from "../icons/index.js";
+import { mainMenu, musicMenu } from "menus";
+import { Logo } from "../icons/Index.js";
 import MenuItem from "./MenuItem";
 
 const Sidebar: NextComponentType = () => (
@@ -47,14 +46,14 @@ const Sidebar: NextComponentType = () => (
     <VStack as="nav" alignItems="initial" spacing={9}>
       <List spacing={4}>
         {mainMenu.map((item) => (
-          <ListItem>
+          <ListItem key={item.name}>
             <MenuItem item={item} />
           </ListItem>
         ))}
       </List>
       <List spacing={4}>
         {musicMenu.map((item) => (
-          <ListItem>
+          <ListItem key={item.name}>
             <MenuItem item={item} />
           </ListItem>
         ))}
@@ -64,7 +63,7 @@ const Sidebar: NextComponentType = () => (
     <Box height="50%" overflowY="auto">
       <List>
         {new Array(50).fill(1).map((_, idx) => (
-          <ListItem color="gray.400" key={_}>
+          <ListItem color="gray.400" key={new Date()}>
             <LinkBox>
               <NextLink href="/" passHref>
                 <LinkOverlay>Playlist {idx + 1}</LinkOverlay>
