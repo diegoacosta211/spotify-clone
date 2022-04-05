@@ -1,5 +1,5 @@
-import prisma from "@/lib/prisma";
 import bcrypt from "bcrypt";
+import prisma from "../lib/prisma";
 import { artistsData } from "./songsData";
 
 const run = async () => {
@@ -39,7 +39,7 @@ const run = async () => {
     new Array(10).fill(1).map((_, idx) => {
       return prisma.playlist.create({
         data: {
-          name: `Playlist number ${idx + 1}`,
+          name: `Playlist #${idx + 1}`,
           user: {
             connect: {
               id: user.id,
