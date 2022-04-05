@@ -2,7 +2,13 @@ import { Global, css } from "@emotion/react";
 import { ChakraProvider } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
 import theme from "@/styles/theme";
+import { NextComponentType } from "next/types";
 import Layout from "../components/Layout";
+
+// Add custom appProp type with using union in type
+type CustomAppProps = AppProps & {
+  Component: NextComponentType & { authPage?: boolean };
+};
 
 const GlobalStyle = () => {
   return (
@@ -28,13 +34,17 @@ const GlobalStyle = () => {
   );
 };
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+const MyApp = ({ Component, pageProps }: CustomAppProps) => {
   return (
     <ChakraProvider theme={theme}>
       <GlobalStyle />
-      <Layout>
+      {Component.authPage ? (
         <Component {...pageProps} />
-      </Layout>
+      ) : (
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      )}
     </ChakraProvider>
   );
 };
