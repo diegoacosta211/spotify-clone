@@ -21,6 +21,7 @@ const Sidebar: NextComponentType = () => {
     <Box
       as="header"
       position="absolute"
+      overflowY="auto"
       height="calc(100% - var(--playerHeight))"
       width="var(--sidebarWidth)"
       backgroundColor="#000"
@@ -68,6 +69,7 @@ const Sidebar: NextComponentType = () => {
           {isLoading ? (
             <Box>Loading...</Box>
           ) : (
+            playlist.length &&
             playlist.map((item) => (
               <ListItem color="gray.400" key={item.id}>
                 <LinkBox>

@@ -8,7 +8,6 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useSWRConfig } from "swr";
 import { auth } from "@/lib/mutation";
 import { FC, useState } from "react";
 import { Logo } from "icons/Index";
