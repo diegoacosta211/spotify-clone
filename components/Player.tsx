@@ -9,7 +9,7 @@ const Player: NextComponentType = () => (
     bottom="0"
     width="100%"
     height="var(--playerHeight)"
-    backgroundColor="var(--playerBg)"
+    backgroundColor="var(--darkBg)"
   >
     <Text>Player</Text>
   </Stack>

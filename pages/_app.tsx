@@ -17,7 +17,7 @@ const GlobalStyle = () => {
         :root {
           --sidebarWidth: 242px;
           --playerHeight: 100px;
-          --playerBg: #181818;
+          --darkBg: #181818;
         }
 
         html,

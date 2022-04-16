@@ -2,7 +2,7 @@ import { Box, Stack, Heading, Text } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/react";
 import { FC, ReactElement } from "react";
 
-type StackedContentType = {
+type GradientLayoutType = {
   color: string;
   image: string;
   title: string;
@@ -12,7 +12,7 @@ type StackedContentType = {
   children: ReactElement;
 };
 
-const StackedContent: FC<StackedContentType> = ({
+const GradientLayout: FC<GradientLayoutType> = ({
   color,
   image,
   title,
@@ -27,7 +27,7 @@ const StackedContent: FC<StackedContentType> = ({
       overflowY="auto"
       bgGradient={`linear-gradient(to bottom, ${color}.500 0%, ${color}.600 15%, ${color}.700 40%, rgba(0,0,0,.95) 75%)`}
     >
-      <Stack p={8} direction="row" spacing="8" bg={`${color}.600`}>
+      <Stack p={8} direction="row" spacing="6" bg={`${color}.600`}>
         <Image
           src={image}
           borderRadius={`${roundImage ? "full" : "3px"}`}
@@ -36,7 +36,13 @@ const StackedContent: FC<StackedContentType> = ({
           alt={title}
         />
         <Box alignSelf="flex-end">
-          <Text color="white" textTransform="uppercase" fontWeight="700" mb={2}>
+          <Text
+            fontSize="sm"
+            color="white"
+            textTransform="uppercase"
+            fontWeight="700"
+            mb={2}
+          >
             {subtitle}
           </Text>
           <Heading
@@ -49,11 +55,14 @@ const StackedContent: FC<StackedContentType> = ({
           >
             {title}
           </Heading>
-          <Text color="whiteAlpha.600">{description}</Text>
+          <Text fontSize="sm" color="whiteAlpha.700">
+            {description}
+          </Text>
         </Box>
       </Stack>
+      {children}
     </Box>
   );
 };
 
-export default StackedContent;
+export default GradientLayout;

@@ -16,7 +16,7 @@ import { Logo } from "../icons/Index.js";
 import MenuItem from "./MenuItem";
 
 const Sidebar: NextComponentType = () => {
-  const { playlist, isLoading, error } = usePlaylist();
+  const { playlist, isLoading } = usePlaylist();
   return (
     <Box
       as="header"
