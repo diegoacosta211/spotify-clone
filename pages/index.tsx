@@ -4,16 +4,17 @@ import { NextPage } from "next";
 import prisma from "@/lib/prisma";
 import { Box, Grid, GridItem, Heading, Text } from "@chakra-ui/layout";
 import { useMe } from "@/lib/hooks";
+import { HomeProps } from "@/types/index";
 
-const Home: NextPage = ({ artist }) => {
-  const { user } = useMe();
-
+const Home: NextPage<HomeProps> = ({ data }) => {
+  const { user, isLoading } = useMe();
   return (
     <GradientLayout
       color="green"
-      title="Diego Acosta"
+      title={`${user?.name} ${user?.lastName}`}
+      isLoading={isLoading}
       subtitle="Profile"
-      description="Sarasa blah blah blah"
+      description={`${user?.playlistCount} public playlists`}
       roundImage
       image="https://i.scdn.co/image/ab6775700000ee85b51b31dbdbdba5f4302757e8"
     >
@@ -25,12 +26,12 @@ const Home: NextPage = ({ artist }) => {
           <Text color="gray.400">Only visible to you</Text>
         </Box>
         <Grid templateColumns="repeat(auto-fill, minmax(130px, 1fr))" gap={4}>
-          {artist.map((art) => (
+          {data.map((artist) => (
             <GridItem>
               <Card
-                title={art.name}
+                title={artist.name}
                 description="Artist"
-                key={art.id}
+                key={artist.id}
                 roundedImage
               />
             </GridItem>
@@ -42,7 +43,7 @@ const Home: NextPage = ({ artist }) => {
 };
 
 export async function getServerSideProps() {
-  const artist = await prisma.artist.findMany({
+  const data = await prisma.artist.findMany({
     orderBy: {
       name: "asc",
     },
@@ -50,7 +51,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      artist,
+      data,
     },
   };
 }

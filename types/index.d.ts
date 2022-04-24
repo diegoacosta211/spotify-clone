@@ -1,3 +1,5 @@
+import { ReactElement } from "react";
+
 export type Mode = "signin" | "signup";
 export type MutationBody = {
   name?: string;
@@ -5,3 +7,25 @@ export type MutationBody = {
   email: string;
   password: string;
 };
+
+export type GradientLayoutType = {
+  color: string;
+  image?: string;
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  roundImage?: boolean;
+  isLoading?: boolean;
+  children: ReactElement;
+};
+
+export interface ArtistType {
+  id: string;
+  name: string;
+  lastName: string;
+  playlistCount: number;
+}
+
+export interface HomeProps {
+  data: ArtistType[];
+}

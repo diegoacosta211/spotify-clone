@@ -20,14 +20,13 @@ const Sidebar: NextComponentType = () => {
   return (
     <Box
       as="header"
-      position="absolute"
+      position="fixed"
       overflowY="auto"
       height="calc(100% - var(--playerHeight))"
       width="var(--sidebarWidth)"
       backgroundColor="#000"
       pt="5"
-      ps="5"
-      pe="5"
+      px="5"
       pb="2"
     >
       <NextLink href="/" passHref>
@@ -73,7 +72,13 @@ const Sidebar: NextComponentType = () => {
             playlist.map((item) => (
               <ListItem color="gray.400" key={item.id}>
                 <LinkBox>
-                  <NextLink href="/" passHref>
+                  <NextLink
+                    href={{
+                      pathname: "/playlist/[id]",
+                      query: { id: item.id },
+                    }}
+                    passHref
+                  >
                     <LinkOverlay>{item.name}</LinkOverlay>
                   </NextLink>
                 </LinkBox>

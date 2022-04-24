@@ -40,6 +40,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(401).json({ error: "Email or password are incorrect" });
     }
   } else {
-    res.status(401).json({ error: "Email or password are incorrect" });
+    res.status(401).json({ error: "Email or password are missing" });
   }
 };

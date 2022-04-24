@@ -30,7 +30,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       id,
       time: Date.now(),
     },
-    process.env. MUSIFY_SECRET_KEY,
+    process.env.MUSIFY_SECRET_KEY,
     { expiresIn: "8h" }
   );
 

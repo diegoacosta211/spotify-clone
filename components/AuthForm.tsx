@@ -10,7 +10,7 @@ import {
 import { useRouter } from "next/router";
 import { auth } from "@/lib/mutation";
 import { FC, useState } from "react";
-import { Logo } from "icons/Index";
+import { Logo } from "icons/Index.js";
 import { MutationBody, Mode } from "@/types/index";
 
 const AuthForm: FC<{ mode: Mode }> = ({ mode }) => {
@@ -35,8 +35,6 @@ const AuthForm: FC<{ mode: Mode }> = ({ mode }) => {
 
     await auth(mode, body);
     router.push("/");
-    // const data = await res.json();
-    // console.log(data);
     setIsLoading(false);
   };
 
