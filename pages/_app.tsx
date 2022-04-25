@@ -1,8 +1,10 @@
 import { Global, css } from "@emotion/react";
 import { ChakraProvider } from "@chakra-ui/react";
+import { StoreProvider } from "easy-peasy";
 import type { AppProps } from "next/app";
 import theme from "@/styles/theme";
 import { NextComponentType } from "next/types";
+import { store } from "@/lib/store";
 import Layout from "../components/Layout";
 
 // Add custom appProp type with using union in type
@@ -38,13 +40,15 @@ const MyApp = ({ Component, pageProps }: CustomAppProps) => {
   return (
     <ChakraProvider theme={theme}>
       <GlobalStyle />
-      {Component.authPage ? (
-        <Component {...pageProps} />
-      ) : (
-        <Layout>
+      <StoreProvider store={store}>
+        {Component.authPage ? (
           <Component {...pageProps} />
-        </Layout>
-      )}
+        ) : (
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        )}
+      </StoreProvider>
     </ChakraProvider>
   );
 };

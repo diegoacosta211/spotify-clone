@@ -1,4 +1,5 @@
 import { ReactElement } from "react";
+import { Action } from "easy-peasy";
 
 export type Mode = "signin" | "signup";
 export type MutationBody = {
@@ -44,4 +45,11 @@ export interface PlaylistType {
 
 export interface PlaylistProps {
   data: PlaylistType;
+}
+
+export interface StoreModel {
+  activeSongs: Song[];
+  activeSong: Song;
+  changeActiveSongs: Action<StoreModel, Song[]>;
+  changeActiveSong: Action<StoreModel, Song>;
 }

@@ -19,8 +19,14 @@ import {
 } from "react-icons/bs";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { formatDate, formatTime } from "@/lib/utils";
+import { useStoreActions } from "easy-peasy";
+import { StoreModel, Song } from "@/types/index";
 
 const SongTable = ({ songs }) => {
+  const changeActiveSong = useStoreActions<StoreModel>(
+    (actions) => actions.changeActiveSong
+  );
+
   return (
     <Box bg="transparent" p={8}>
       <Stack direction="row" alignItems="center" mb="6">
@@ -75,6 +81,7 @@ const SongTable = ({ songs }) => {
                   _hover={{
                     backgroundColor: "whiteAlpha.200",
                   }}
+                  onClick={() => changeActiveSong(song)}
                 >
                   <Td>{i + 1}</Td>
                   <Td>{song.name}</Td>
