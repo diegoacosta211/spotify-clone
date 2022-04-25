@@ -29,3 +29,19 @@ export interface ArtistType {
 export interface HomeProps {
   data: ArtistType[];
 }
+
+export interface Song {
+  id: number;
+  name: string;
+  createdAt: Date;
+  duration: number;
+}
+export interface PlaylistType {
+  id: string;
+  name: string;
+  songs: Song[];
+}
+
+export interface PlaylistProps {
+  data: PlaylistType;
+}

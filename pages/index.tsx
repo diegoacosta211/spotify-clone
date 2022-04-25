@@ -1,6 +1,6 @@
 import GradientLayout from "@/components/GradientLayout";
 import Card from "@/components/Card";
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import prisma from "@/lib/prisma";
 import { Box, Grid, GridItem, Heading, Text } from "@chakra-ui/layout";
 import { useMe } from "@/lib/hooks";
@@ -27,13 +27,8 @@ const Home: NextPage<HomeProps> = ({ data }) => {
         </Box>
         <Grid templateColumns="repeat(auto-fill, minmax(130px, 1fr))" gap={4}>
           {data.map((artist) => (
-            <GridItem>
-              <Card
-                title={artist.name}
-                description="Artist"
-                key={artist.id}
-                roundedImage
-              />
+            <GridItem key={artist.id}>
+              <Card title={artist.name} description="Artist" roundedImage />
             </GridItem>
           ))}
         </Grid>
@@ -42,7 +37,7 @@ const Home: NextPage<HomeProps> = ({ data }) => {
   );
 };
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async () => {
   const data = await prisma.artist.findMany({
     orderBy: {
       name: "asc",
@@ -54,6 +49,6 @@ export async function getServerSideProps() {
       data,
     },
   };
-}
+};
 
 export default Home;

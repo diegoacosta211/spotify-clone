@@ -3,8 +3,10 @@ import { validateToken } from "@/lib/auth";
 import { getColorBG } from "@/lib/utils";
 import GradientLayout from "@/components/GradientLayout";
 import SongTable from "@/components/SongTable";
+import { GetServerSideProps, NextPage } from "next";
+import { PlaylistProps } from "@/types/index";
 
-const Playlist = ({ playlist }) => {
+const Playlist: NextPage<PlaylistProps> = ({ data: playlist }) => {
   const color = getColorBG(playlist.id);
   return (
     <GradientLayout
@@ -12,7 +14,7 @@ const Playlist = ({ playlist }) => {
       roundImage={false}
       title={playlist.name}
       subtitle="Playlist"
-      description={`There are ${playlist.songs.length} songs in the playlist.`}
+      description={`There are ${playlist.songs.length} songs in the data.`}
       image={`https://picsum.photos/400?random=${playlist.id}`}
     >
       <SongTable songs={playlist.songs} />
@@ -20,12 +22,23 @@ const Playlist = ({ playlist }) => {
   );
 };
 
-export async function getServerSideProps({ query, req }) {
-  const { id } = validateToken(req.cookies[process.env.MUSIFY_TOKEN_NAME]);
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  let user;
+  try {
+    user = validateToken(ctx.req.cookies[process.env.MUSIFY_TOKEN_NAME]);
+  } catch (error) {
+    return {
+      redirect: {
+        destination: "/sign-in",
+        permanent: false,
+      },
+    };
+  }
+
   const playlist = await prisma.playlist.findFirst({
     where: {
-      id: +query.id,
-      userId: id,
+      id: +ctx.query.id,
+      userId: user.id,
     },
     include: {
       songs: {
@@ -40,11 +53,12 @@ export async function getServerSideProps({ query, req }) {
       },
     },
   });
+
   return {
     props: {
-      playlist,
+      data: playlist,
     },
   };
-}
+};
 
 export default Playlist;
