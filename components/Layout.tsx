@@ -1,6 +1,6 @@
 import { Stack } from "@chakra-ui/layout";
 import { NextComponentType } from "next";
-import Player from "./Player";
+import Player from "./PlayerBar";
 import Sidebar from "./Sidebar";
 
 const Layout: NextComponentType = ({ children }) => {

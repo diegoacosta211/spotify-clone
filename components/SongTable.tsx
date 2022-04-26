@@ -20,12 +20,21 @@ import {
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { formatDate, formatTime } from "@/lib/utils";
 import { useStoreActions } from "easy-peasy";
-import { StoreModel, Song } from "@/types/index";
+import { StoreModel } from "@/types/index";
 
 const SongTable = ({ songs }) => {
-  const changeActiveSong = useStoreActions<StoreModel>(
+  const playSongs = useStoreActions<StoreModel>(
+    (actions) => actions.changeActiveSongs
+  );
+
+  const playSong = useStoreActions<StoreModel>(
     (actions) => actions.changeActiveSong
   );
+
+  const handlePlay = (activeSong?) => {
+    playSong(activeSong || songs[0]);
+    playSongs(songs);
+  };
 
   return (
     <Box bg="transparent" p={8}>
@@ -35,6 +44,7 @@ const SongTable = ({ songs }) => {
           size="lg"
           icon={<BsFillPlayFill fontSize="24px" />}
           isRound
+          onClick={() => handlePlay()}
           aria-label="Play"
         />
         <IconButton
@@ -81,7 +91,7 @@ const SongTable = ({ songs }) => {
                   _hover={{
                     backgroundColor: "whiteAlpha.200",
                   }}
-                  onClick={() => changeActiveSong(song)}
+                  onClick={() => handlePlay(song)}
                 >
                   <Td>{i + 1}</Td>
                   <Td>{song.name}</Td>
