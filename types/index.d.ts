@@ -48,7 +48,7 @@ export interface PlaylistProps {
 }
 
 export interface StoreModel {
-  activeSongs: Song[];
+  activePlaylist: Song[];
   activeSong: Song;
   changeActiveSongs: Action<StoreModel, Song[]>;
   changeActiveSong: Action<StoreModel, Song>;

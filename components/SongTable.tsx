@@ -23,17 +23,17 @@ import { useStoreActions } from "easy-peasy";
 import { StoreModel } from "@/types/index";
 
 const SongTable = ({ songs }) => {
-  const playSongs = useStoreActions<StoreModel>(
+  const setActivePlaylist = useStoreActions<StoreModel>(
     (actions) => actions.changeActiveSongs
   );
 
-  const playSong = useStoreActions<StoreModel>(
+  const setActiveSong = useStoreActions<StoreModel>(
     (actions) => actions.changeActiveSong
   );
 
   const handlePlay = (activeSong?) => {
-    playSong(activeSong || songs[0]);
-    playSongs(songs);
+    setActiveSong(activeSong || songs[0]);
+    setActivePlaylist(songs);
   };
 
   return (

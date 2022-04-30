@@ -18,17 +18,7 @@ import MenuItem from "./MenuItem";
 const Sidebar: NextComponentType = () => {
   const { playlist, isLoading } = usePlaylist();
   return (
-    <Box
-      as="header"
-      position="fixed"
-      overflowY="auto"
-      height="calc(100% - var(--playerHeight))"
-      width="var(--sidebarWidth)"
-      backgroundColor="#000"
-      pt="5"
-      px="5"
-      pb="2"
-    >
+    <Box>
       <NextLink href="/" passHref>
         <Link display="block" href="/" mb="8">
           <Logo
